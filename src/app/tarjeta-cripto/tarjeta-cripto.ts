@@ -2,11 +2,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Cripto } from '../cripto'; // Importamos el molde
 import { CurrencyPipe } from '@angular/common';
 import { TendenciaPipe } from '../pipes/tendencia-pipe';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-tarjeta-cripto', // Angular le pone 'app-' por defecto
   standalone: true,
-  imports: [CurrencyPipe, TendenciaPipe],
+  imports: [CurrencyPipe, TendenciaPipe, RouterLink],
   templateUrl: './tarjeta-cripto.html',
   styleUrl: './tarjeta-cripto.css'
 })

@@ -1,43 +1,7 @@
-<div class="contenedor">
-  <h1>Mercado Cripto</h1>
-
-  <div style="margin-bottom: 20px;">
-    <input 
-      type="text" 
-      placeholder="Busca una moneda (ej. Bitcoin)..." 
-      style="padding: 10px; width: 100%; border-radius: 5px; border: 1px solid #ccc;"
-      (input)="textoBusqueda.set($any($event.target).value)"
-    >
-  </div>
-
-  <!-- @if (monedaDestacada()) {
-    <app-panel-detalles
-    [monedaActiva]="monedaDestacada()!"
-    (cerrarPanel)="monedaDestacada.set(undefined)"></app-panel-detalles>
-  }
-  @if (!monedaDestacada()) {
-  <button (click)="monedaDestacada.set(bancoCripto.obtenerMonedas()[0])">Destacar bitcoin</button>
-
-  } -->
-  
-  @if (ultimaCompra()) {
-    <div class="mensaje-compra">
-      ¡Has comprado <strong>{{ ultimaCompra() }}</strong> con éxito!
+<div class="nav">
+      <a routerLink="/">🔙 Volver al Inicio</a>
     </div>
-  }
 
-  <div class="grid">
-    @for(monedaIterada of monedasFiltradas(); track monedaIterada.simbolo) {
-        <app-tarjeta-cripto 
-          [moneda]="monedaIterada"
-          (comprado)="registrarCompra($event)">
-          
-
-        </app-tarjeta-cripto>
-      
-        
-    } @empty {
-      <p>No hay criptomonedas disponibles.</p>
-    }
-  </div>
-</div>
+    <div class="contenedor" style="padding: 20px; max-width: 600px; margin: 0 auto;">
+      <router-outlet></router-outlet>
+    </div>

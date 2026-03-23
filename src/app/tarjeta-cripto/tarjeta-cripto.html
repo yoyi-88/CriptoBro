@@ -11,5 +11,5 @@
     }
   </div>
 
-  <button (click)="comprado.emit(moneda.nombre)">Comprar</button>
+  <button [routerLink]="['/moneda', moneda.simbolo]">Ver Detalles</button>
 </div>

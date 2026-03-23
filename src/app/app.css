@@ -1,2 +1,2 @@
-.contenedor { padding: 20px; font-family: sans-serif; max-width: 500px; }
-.mensaje-compra { padding: 10px; background-color: #e0f7fa; border-left: 4px solid #00bcd4; margin-bottom: 20px; }
+.nav { background: #1a1a1a; padding: 15px; color: white; text-align: center; margin-bottom: 20px;}
+.nav a { color: #00bcd4; text-decoration: none; font-weight: bold; cursor: pointer; }
