@@ -1,0 +1,15 @@
+<div class="moneda-card">
+  <div>
+    <strong>{{moneda.nombre}}</strong> ({{moneda.simbolo}})
+  </div>
+  
+  <div>
+    @if (moneda.tendencia > 0) {
+      <span class="verde">{{moneda.precio | currency:'EUR'}} ({{moneda.tendencia | tendencia}})</span>
+    } @else {
+      <span class="rojo">{{moneda.precio | currency:'EUR'}} ({{moneda.tendencia | tendencia}})</span>
+    }
+  </div>
+
+  <button (click)="comprado.emit(moneda.nombre)">Comprar</button>
+</div>
