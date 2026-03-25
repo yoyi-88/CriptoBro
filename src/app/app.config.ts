@@ -8,8 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 // Importar locales aquí también si prefieres
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { Inicio } from './inicio/inicio';
-import { Detalle } from './detalle/detalle';
+
 registerLocaleData(localeEs, 'es');
 
 

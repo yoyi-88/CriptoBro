@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Inicio } from './inicio/inicio';
-import { Detalle } from './detalle/detalle';
 
 export const routes: Routes = [
     {
@@ -9,6 +8,7 @@ export const routes: Routes = [
     },
     {
         path: 'moneda/:id', // Si la URL tiene un parámetro dinámico (ej: localhost:4200/moneda/BTC)
-        component: Detalle
+        // Lazy loading
+        loadComponent: () => import('./detalle/detalle').then(m => m.Detalle)
     }
 ];
