@@ -1,20 +1,23 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
-import { Cripto } from '../cripto'; // Importamos el molde
-// TODO 6: Importa el componente hijo
+import { Cripto } from '../cripto'; 
 import { TarjetaCripto } from '../tarjeta-cripto/tarjeta-cripto';
 import { PanelDetalles } from '../panel-detalles/panel-detalles';
 import { CriptoService } from '../services/cripto-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-inicio',
   imports: [TarjetaCripto, PanelDetalles],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css',
 })
-export class Inicio implements OnInit{
+export class Inicio {
   bancoCripto = inject(CriptoService);
-  listaMonedas = signal<Cripto[]>([]);
+
+  // Llama a internet, espera la respuesta, y la guarda en un Signal automáticamente.
+  listaMonedas = toSignal(this.bancoCripto.obtenerMonedasDeVerdad(), { initialValue: [] });
 
   textoBusqueda = signal('');
+
 
   monedasFiltradas = computed(() => {
     const texto = this.textoBusqueda().toLowerCase();
@@ -36,23 +39,4 @@ export class Inicio implements OnInit{
 
   monedaDestacada = signal<Cripto | undefined>(undefined);
 
-  ngOnInit() {
-    this.bancoCripto.obtenerMonedasDeVerdad()
-    .subscribe({
-      next: (respuesta) => {
-        // (La API de CoinCap mete todos los datos dentro de un array llamado 'data')
-        const datosTraducidos = respuesta.map((item: any) => ({
-          simbolo: item.symbol.toUpperCase(), // Pasamos 'btc' a 'BTC'
-            nombre: item.name,
-            precio: item.current_price, // Ya viene como número
-            tendencia: item.price_change_percentage_24h // Ya viene como número
-        }));
-
-        this.listaMonedas.set(datosTraducidos);
-      },
-      error: (fallo) => {
-        console.error("Algo falló:", fallo)
-      }
-    });
-  }
 }
