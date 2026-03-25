@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import { Cripto } from '../cripto'; 
 import { TarjetaCripto } from '../tarjeta-cripto/tarjeta-cripto';
 import { PanelDetalles } from '../panel-detalles/panel-detalles';
@@ -11,6 +11,19 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './inicio.css',
 })
 export class Inicio {
+  constructor() {
+    // Recuperamos la búsqueda anterior (si existe) nada más arrancar
+    const busquedaGuardada = localStorage.getItem('miBusquedaCripto');
+    if (busquedaGuardada) {
+      this.textoBusqueda.set(busquedaGuardada);
+    }
+
+    // EL VIGILANTE: Cada vez que textoBusqueda() cambie, guárdalo en el disco duro.
+
+    effect(() => {
+      localStorage.setItem('miBusquedaCripto', this.textoBusqueda());
+    });
+  }
   bancoCripto = inject(CriptoService);
 
   // Llama a internet, espera la respuesta, y la guarda en un Signal automáticamente.

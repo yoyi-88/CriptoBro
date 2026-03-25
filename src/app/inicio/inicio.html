@@ -6,6 +6,7 @@
       type="text" 
       placeholder="Busca una moneda (ej. Bitcoin)..." 
       style="padding: 10px; width: 100%; border-radius: 5px; border: 1px solid #ccc;"
+      [value]="textoBusqueda()"
       (input)="textoBusqueda.set($any($event.target).value)"
     >
   </div>
