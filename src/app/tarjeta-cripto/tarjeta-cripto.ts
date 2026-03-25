@@ -22,4 +22,14 @@ export class TarjetaCripto {
   // Ejemplo: @Output() comprado = new EventEmitter<string>();
   @Output() comprado = new EventEmitter<string>();
 
+  // Esta función mira la moneda que nos ha pasado el Jefe (@Input) 
+  // y devuelve una palabra clave.
+  obtenerEstadoMercado(): string {
+    const tendencia = this.moneda.tendencia;
+    
+    if (tendencia > 0.5) return 'alcista';
+    if (tendencia < -0.5) return 'bajista';
+    return 'estable';
+  }
+
 }

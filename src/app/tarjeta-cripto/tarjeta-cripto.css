@@ -1,4 +1,5 @@
 .moneda-card { padding: 15px; border: 1px solid #ddd; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;}
 .verde { color: green; font-weight: bold; }
 .rojo { color: red; font-weight: bold; }
+.gris {color: grey; font-weight: bold;}
 button { background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }

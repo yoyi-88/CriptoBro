@@ -4,10 +4,18 @@
   </div>
   
   <div>
-    @if (moneda.tendencia > 0) {
-      <span class="verde">{{moneda.precio | currency:'EUR'}} ({{moneda.tendencia | tendencia}})</span>
-    } @else {
-      <span class="rojo">{{moneda.precio | currency:'EUR'}} ({{moneda.tendencia | tendencia}})</span>
+    @switch (obtenerEstadoMercado()) {
+      @case ('alcista') {
+        <span class="verde">🔥 Alcista {{ moneda.precio | currency:'EUR' }}</span>
+      }
+
+      @case ('bajista') {
+        <span class="rojo">🥶 Bajista: {{ moneda.precio | currency:'EUR' }}</span>
+      }
+      
+      @default {
+        <span class="gris">⚖️ Estable: {{ moneda.precio | currency:'EUR' }}</span>
+      }
     }
   </div>
 
