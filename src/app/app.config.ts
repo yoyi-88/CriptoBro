@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, LOCALE_ID } from '@angular/core';
-import { provideRouter, Routes } from '@angular/router';
+import { provideRouter, Routes, withPreloading, PreloadAllModules } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http'; 
 import { registerLocaleData } from '@angular/common';
@@ -16,6 +16,9 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'es' },
     // Proveemos la moneda base
     { provide: MONEDA_BASE, useValue: 'eur' },
+
+    // Descarga las rutas pesadas en segundo plano cuando el navegador esté libre.
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     
     // Proveemos los Exchanges usando MULTI: TRUE (se irán acumulando en un array)
     { provide: EXCHANGES, useValue: 'Binance', multi: true },
