@@ -22,9 +22,14 @@
   } -->
   
   @if (ultimaCompra()) {
-    <div class="mensaje-compra">
-      ¡Has comprado <strong>{{ ultimaCompra() }}</strong> con éxito!
-    </div>
+    
+    <ng-container *ngComponentOutlet="
+        plantillaAlerta; 
+        inputs: { 
+          moneda: ultimaCompra(),
+          cerrar: cerrarAlerta }; 
+    "></ng-container>
+
   }
 
   <div class="grid">
@@ -41,4 +46,13 @@
       <p>No hay criptomonedas disponibles.</p>
     }
   </div>
+</div>
+<div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.9em; color: gray;">
+  <p>Operando en los mercados: {{ mercadosSoportados.join(', ') }}</p>
+  
+  @if (esModoOscuro) {
+    <p>🌙 Modo oscuro activado</p>
+  } @else {
+    <p>☀️ Modo oscuro no disponible (Token opcional no encontrado)</p>
+  }
 </div>

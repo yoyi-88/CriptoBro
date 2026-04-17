@@ -4,9 +4,13 @@ import { TarjetaCripto } from '../tarjeta-cripto/tarjeta-cripto';
 import { PanelDetalles } from '../panel-detalles/panel-detalles';
 import { CriptoService } from '../services/cripto-service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { NgComponentOutlet } from '@angular/common'; 
+import { Alerta } from '../alerta/alerta';
+import { EXCHANGES, MODO_OSCURO } from '../app.tokens';
+
 @Component({
   selector: 'app-inicio',
-  imports: [TarjetaCripto, PanelDetalles],
+  imports: [TarjetaCripto, PanelDetalles, NgComponentOutlet],
   // Angular solo repintará el HTML cuando un Signal (como textoBusqueda o monedasFiltradas) cambie.
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './inicio.html',
@@ -53,5 +57,20 @@ export class Inicio {
   }
 
   monedaDestacada = signal<Cripto | undefined>(undefined);
+  
+  // el HTML leerá esta variable para saber qué componente dibujar.
+  plantillaAlerta = Alerta;
+
+
+  // Para los Outputs dinámicos, necesitamos usar funciones flecha (Arrow functions)
+  cerrarAlerta = () => {
+    this.ultimaCompra.set('');
+  }
+
+  // Inyectamos el array de exchanges (Angular junta todos los multi:true en un array automático)
+  mercadosSoportados = inject(EXCHANGES);
+
+  // Inyectamos algo opcional. Como no lo proveímos en app.config.ts, esto valdrá 'null'
+  esModoOscuro = inject(MODO_OSCURO, { optional: true });
 
 }

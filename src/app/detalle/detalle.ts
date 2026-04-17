@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-detalle',
   imports: [],
