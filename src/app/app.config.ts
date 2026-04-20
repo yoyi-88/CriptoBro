@@ -7,11 +7,14 @@ import localeEs from '@angular/common/locales/es';
 import { MONEDA_BASE, EXCHANGES } from './app.tokens';
 import { apiKeyInterceptor } from './auth.interceptor';
 import { errorInterceptor } from './error.interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
+
 
 registerLocaleData(localeEs, 'es');
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideHttpClient(
       // Configuramos el internet de la app para que use nuestros interceptores.
       withInterceptors([apiKeyInterceptor, errorInterceptor])

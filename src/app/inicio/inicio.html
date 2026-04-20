@@ -9,6 +9,20 @@
       [value]="textoBusqueda()"
       (input)="textoBusqueda.set($any($event.target).value)"
     >
+
+    <button (click)="toggleFiltros()" style="background: #333; color: white; padding: 5px 15px; border: none; border-radius: 4px; cursor: pointer;">
+      ⚙️ Filtros Avanzados
+    </button>
+
+    <div 
+      [@desplegarFiltros]="filtrosAbiertos() ? 'abierto' : 'cerrado'" 
+      style="overflow: hidden; background: #2a2a2a; border-radius: 5px; margin-top: 10px; color: #00bcd4;">
+      
+      <p>Aquí podríamos poner selectores de tendencia, elegir un mercado base, o un rango de precios...</p>
+      <label><input type="checkbox"> Solo monedas alcistas</label><br>
+      <label><input type="checkbox"> Solo mis favoritos</label>
+      
+    </div>
   </div>
 
   <!-- @if (monedaDestacada()) {
