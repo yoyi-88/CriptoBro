@@ -1,7 +1,6 @@
 import { Component, inject, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
 import { Cripto } from '../cripto'; 
 import { TarjetaCripto } from '../tarjeta-cripto/tarjeta-cripto';
-import { PanelDetalles } from '../panel-detalles/panel-detalles';
 import { CriptoService } from '../services/cripto-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NgComponentOutlet } from '@angular/common'; 
@@ -11,7 +10,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 @Component({
   selector: 'app-inicio',
-  imports: [TarjetaCripto, PanelDetalles, NgComponentOutlet],
+  imports: [TarjetaCripto, NgComponentOutlet],
   // Angular solo repintará el HTML cuando un Signal (como textoBusqueda o monedasFiltradas) cambie.
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './inicio.html',

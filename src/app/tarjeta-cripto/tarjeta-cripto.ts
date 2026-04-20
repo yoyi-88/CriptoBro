@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Cripto } from '../cripto'; // Importamos el molde
 import { CurrencyPipe } from '@angular/common';
-import { TendenciaPipe } from '../pipes/tendencia-pipe';
 import { RouterLink } from '@angular/router';
 import { PortfolioStore } from '../portfolio.store';
 
@@ -9,7 +8,7 @@ import { PortfolioStore } from '../portfolio.store';
 @Component({
   selector: 'app-tarjeta-cripto', // Angular le pone 'app-' por defecto
   standalone: true,
-  imports: [CurrencyPipe, TendenciaPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink],
   // Le decimos a Angular: "Solo actualiza este HTML si cambia el @Input() moneda"
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tarjeta-cripto.html',
