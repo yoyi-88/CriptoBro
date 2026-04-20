@@ -1,9 +1,9 @@
-import { Component, inject, signal, computed, effect, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, signal, computed, effect, ChangeDetectionStrategy, afterNextRender } from '@angular/core';
 import { Cripto } from '../cripto'; 
 import { TarjetaCripto } from '../tarjeta-cripto/tarjeta-cripto';
 import { CriptoService } from '../services/cripto-service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NgComponentOutlet } from '@angular/common'; 
+import { NgComponentOutlet, isPlatformBrowser } from '@angular/common'; 
 import { Alerta } from '../alerta/alerta';
 import { EXCHANGES, MODO_OSCURO } from '../app.tokens';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -37,19 +37,23 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ],
 })
 export class Inicio {
+
   constructor() {
+    afterNextRender(() => {
     // Recuperamos la búsqueda anterior (si existe) nada más arrancar
-    const busquedaGuardada = localStorage.getItem('miBusquedaCripto');
-    if (busquedaGuardada) {
-      this.textoBusqueda.set(busquedaGuardada);
-    }
+      const busquedaGuardada = localStorage.getItem('miBusquedaCripto');
+      if (busquedaGuardada) {
+        this.textoBusqueda.set(busquedaGuardada);
+      }
 
-    // EL VIGILANTE: Cada vez que textoBusqueda() cambie, guárdalo en el disco duro.
+      // EL VIGILANTE: Cada vez que textoBusqueda() cambie, guárdalo en el disco duro.
 
-    effect(() => {
-      localStorage.setItem('miBusquedaCripto', this.textoBusqueda());
+      effect(() => {
+        localStorage.setItem('miBusquedaCripto', this.textoBusqueda());
+      });
     });
-  }
+    
+  } 
   bancoCripto = inject(CriptoService);
 
   // Llama a internet, espera la respuesta, y la guarda en un Signal automáticamente.
