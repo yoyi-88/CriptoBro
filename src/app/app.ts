@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
+import { PortfolioStore } from './portfolio.store';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -7,5 +8,8 @@ import { RouterOutlet, RouterLink } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App {
+  // 2. Inyectamos el Almacén Global
+  store = inject(PortfolioStore);
+}
 

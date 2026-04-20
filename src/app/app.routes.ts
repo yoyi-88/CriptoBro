@@ -15,5 +15,9 @@ export const routes: Routes = [
 
         // Seguridad Activada
         canActivate: [aceptarRiesgosGuard]
+    },
+    { 
+        path: 'invertir', 
+        loadComponent: () => import('./inversion/inversion').then(m => m.Inversion) 
     }
 ];

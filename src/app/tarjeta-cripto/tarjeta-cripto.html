@@ -25,4 +25,14 @@
     Comprar
   </button>
   <button [routerLink]="['/moneda', moneda.simbolo]" class="botonVerDetalles">Ver Detalles</button>
+  <button 
+      (click)="store.toggleFavorito(moneda)" 
+      style="background-color: transparent; border: 1px solid #ffc107; padding: 5px; border-radius: 4px; cursor: pointer; font-size: 1.2rem;">
+      
+      @if (store.esFavorita(moneda.simbolo)) {
+        ⭐
+      } @else {
+        ☆
+      }
+    </button>
 </div>

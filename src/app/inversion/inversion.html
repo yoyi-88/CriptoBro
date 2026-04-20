@@ -1,0 +1,36 @@
+<div style="max-width: 500px; margin: 0 auto; background: #222; padding: 20px; border-radius: 10px; color: white;">
+  <h2>Estrategia de Venta</h2>
+
+  <form [formGroup]="formularioInversion" (ngSubmit)="guardarPlan()">
+    
+    <div style="margin-bottom: 20px;">
+      <label>Moneda a comprar (ej. BTC):</label><br>
+      <input type="text" formControlName="simbolo" style="padding: 10px; width: 100%;">
+      
+      @if (formularioInversion.get('simbolo')?.hasError('simboloInvalido') && formularioInversion.get('simbolo')?.touched) {
+        <small style="color: #ff4d4d;">El símbolo debe tener al menos 3 letras.</small>
+      }
+    </div>
+
+    <div formArrayName="objetivosVenta">
+      <h3>Precios objetivo (Take Profit):</h3>
+      
+      @for (control of objetivos.controls; track $index) {
+        
+        <div [formGroupName]="$index" style="margin-bottom: 10px; display: flex; gap: 10px;">
+          
+          <input type="number" formControlName="precioTarget" placeholder="Precio de venta..." style="padding: 10px; flex-grow: 1;">
+          
+        </div>
+        
+      }
+    </div>
+
+    <div style="margin-top: 20px; display: flex; gap: 10px;">
+      <button type="button" (click)="aniadirObjetivo()" style="padding: 10px; background: #555; color: white; border: none;">+ Añadir otro objetivo</button>
+      
+      <button type="submit" style="padding: 10px; background: #00bcd4; border: none; font-weight: bold;">Guardar Plan</button>
+    </div>
+
+  </form>
+</div>

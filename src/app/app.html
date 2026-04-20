@@ -1,5 +1,10 @@
 <div class="nav">
-      <a routerLink="/">🔙 Volver al Inicio</a>
+      <a routerLink="/">🏠 Inicio</a>
+      <a routerLink="/invertir">💰 Plan de Inversión</a>
+      
+      <span>⭐ Mis Favoritos: 
+        <span class="badge">{{ store.totalFavoritos() }}</span>
+      </span>
     </div>
 
     <div class="contenedor" style="padding: 20px; max-width: 600px; margin: 0 auto;">

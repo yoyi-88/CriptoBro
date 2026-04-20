@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Cripto } from '../cripto'; // Importamos el molde
 import { CurrencyPipe } from '@angular/common';
 import { TendenciaPipe } from '../pipes/tendencia-pipe';
 import { RouterLink } from '@angular/router';
+import { PortfolioStore } from '../portfolio.store';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class TarjetaCripto {
   // TODO 2: Crea el @Output llamado 'comprado' que sea un nuevo EventEmitter<string>()
   // Ejemplo: @Output() comprado = new EventEmitter<string>();
   @Output() comprado = new EventEmitter<string>();
+
+  // Inyectamos el Store en el trabajador
+  store = inject(PortfolioStore);
 
   // Esta función mira la moneda que nos ha pasado el Jefe (@Input) 
   // y devuelve una palabra clave.
