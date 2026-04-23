@@ -1,12 +1,18 @@
 <div class="nav">
-      <a routerLink="/">🏠 Inicio</a>
-      <a routerLink="/invertir">💰 Plan de Inversión</a>
-      
-      <span>⭐ Mis Favoritos: 
-        <span class="badge">{{ store.totalFavoritos() }}</span>
-      </span>
-    </div>
+  <a routerLink="/">🏠 Inicio</a>
+  <a routerLink="/invertir">💰 Plan de Inversión</a>
 
-    <div class="contenedor" style="padding: 20px; max-width: 600px; margin: 0 auto;">
-      <router-outlet></router-outlet>
-    </div>
+  <span>⭐ Mis Favoritos:
+    <span class="badge">{{ store.totalFavoritos() }}</span>
+  </span>
+  @if (!auth.estadoLogin()){
+    <button (click)="auth.loginConGoogle()">Iniciar Sesión</button>
+  } @else {
+    <button (click)="auth.logout()">Logout</button>
+  }
+  <span>{{auth.estadoLogin()?.displayName}}</span>
+</div>
+
+<div class="contenedor" style="padding: 20px; max-width: 600px; margin: 0 auto;">
+  <router-outlet></router-outlet>
+</div>

@@ -7,6 +7,8 @@ import { NgComponentOutlet, isPlatformBrowser } from '@angular/common';
 import { Alerta } from '../alerta/alerta';
 import { EXCHANGES, MODO_OSCURO } from '../app.tokens';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+// Import login
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-inicio',

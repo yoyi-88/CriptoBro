@@ -9,6 +9,11 @@ import { apiKeyInterceptor } from './auth.interceptor';
 import { errorInterceptor } from './error.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+// Imports base de datos
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { firebaseConfig } from '../environments/environments';
 
 registerLocaleData(localeEs, 'es');
 
@@ -21,7 +26,6 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([apiKeyInterceptor, errorInterceptor]),
     ),
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
     { provide: LOCALE_ID, useValue: 'es' },
     // Proveemos la moneda base
     { provide: MONEDA_BASE, useValue: 'eur' },
@@ -34,5 +38,10 @@ export const appConfig: ApplicationConfig = {
     { provide: EXCHANGES, useValue: 'Coinbase', multi: true },
     { provide: EXCHANGES, useValue: 'Kraken', multi: true },
     provideClientHydration(withEventReplay()),
+    
+    // Firebase
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
 };
